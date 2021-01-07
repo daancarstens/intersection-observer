@@ -5,8 +5,12 @@ const opties = {};
 
 const verwerkDoorsnijding = (entries, observer) => {
     entries.forEach(entry => {
-        console.log(entry.target + " doorsnijdt " + entry.isIntersecting);
-    })
+        // console.log(entry.target.id + " doorsnijdt " + entry.isIntersecting);
+        if ( entry.isIntersecting ) {
+           let link = zoekBijpassendeLink('#' + entry.targeet.id);
+            maakActief(link);
+        }
+    });
 }
 
 let observer = new IntersectionObserver(verwerkDoorsnijding, opties);
@@ -33,3 +37,9 @@ alleLinks.forEach( (link) => {
         window.location = e.target.href;
     })
 });
+
+
+const zoekBijpassendeLink = (id) => {
+    let link = document.querySelector('nav a[href="' + id + '"]');
+    return link;
+}
